@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>A HTML Quine – Rohan's notes</title>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>A HTML Quine</h1>
+
+<p>A quine is a program that produces its source code as output. With HTML plus CSS (Turing-complete when paired with the DOM), you can make a page that displays its own markup.</p>
+
+<h3>The trick</h3>
+
+<p>Use <code>::before</code> and <code>::after</code> pseudo-elements to inject angle brackets around each tag. Example for paragraphs:</p>
+
+<p>
+<style class="visible">
+p::before{content:'<p>'} p::after{content:'</p>'}
+*{display:block; font-family:monospace}
+style.visible::before{content:'<style>'} style.visible::after{content:'<\/style>'}
+style{display:none} style.visible{display:block;font-size:0.5em}
+</style>
+</p>
+
+<p>Repeat for <code>html</code>, <code>head</code>, <code>body</code>, headings, tables, and links. For anchors, use <code>attr(href)</code>. Escape the slash in <code>&lt;/style&gt;</code> as <code>&lt;\/style&gt;</code> so the browser does not close the stylesheet early.</p>
+
+<p>Set <code>* { display: block; }</code> so the embedded CSS block is visible on the page. Use <code>a { display: inline; }</code> so links do not break across lines awkwardly.</p>
+
+<p>To copy the full quine source, print the page and copy from the print preview — pseudo-element content is hard to select in the live DOM.</p>
+
+<p>Back to <a href="../../../">home</a>.</p>
+
+</body>
+</html>
